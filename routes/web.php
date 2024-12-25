@@ -15,7 +15,6 @@ Route::get('/clear-cache', function () {
     Artisan::call('route:clear');
     Artisan::call('view:clear');
     Cache::flush();
-
     return 'Application cache cleared';
 });
 
