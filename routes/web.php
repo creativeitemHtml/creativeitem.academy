@@ -18,6 +18,7 @@ Route::get('/clear-cache', function () {
     return 'Application cache cleared';
 });
 
+
 Route::get('home/switch/{id}', [HomeController::class, 'homepage_switcher'])->name('home.switch');
 
 //Redirect route
