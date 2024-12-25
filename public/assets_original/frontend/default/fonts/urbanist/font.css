@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'urbanist-regular';
+  src: url('./static/Urbanist-Regular.ttf');
+}
+@font-face {
+  font-family: 'urbanist-thin';
+  src: url('./static/Urbanist-Thin.ttf');
+}
+@font-face {
+  font-family: 'urbanist-semi-bold';
+  src: url('./static/Urbanist-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'urbanist-bold';
+  src: url('./static/Urbanist-Bold.ttf');
+}
+@font-face {
+  font-family: 'urbanist-ex-bold';
+  src: url('./static/Urbanist-ExtraBold.ttf');
+}

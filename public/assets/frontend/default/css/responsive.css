@@ -1,0 +1,242 @@
+
+@media all and (max-width: 1199px){
+    .hs-title-60px {
+        font-size: 55px;
+    }
+    .hs-title-48px {
+        font-size: 44px;
+    }
+    /* Home Page */
+    .hero-banner{
+        margin-right: -40px;
+    }
+}
+
+@media all and (max-width: 991px){
+    .hs-title-60px {
+        font-size: 50px;
+    }
+    .hs-title-48px {
+        font-size: 40px;
+    }
+    .man-title-36px {
+        font-size: 33px;
+    }
+    .hs-title-36px {
+        font-size: 33px;
+    }
+    .dark-menu-title{
+        font-size: 17px;
+    }
+    /* Header */
+    .header-search-form{
+        max-width: max-content;
+        min-width: max-content;
+    }
+     /* Header */
+     .bn-navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-search-wrap {
+        column-gap: 16px;
+    }
+    .bn-menu-offcanvas.offcanvas-lg.offcanvas-start{
+        width: 300px;
+        border: none;
+    }
+    .bn-menu-offcanvas .btn-close:focus{
+        box-shadow: none;
+    }
+    .bn-nav-item{
+        width: 100%;
+    }
+    .bn-nav-link{
+        width: 100%;
+    }
+    .nav-item-have-sub .bn-nav-link{
+        justify-content: space-between;
+        align-items: flex-start !important;
+    }
+    .nav-item-have-sub .bn-nav-link > svg {
+        margin-top: 2px;
+        transition: .3s;
+    }
+    .nav-item-have-sub {
+        position: inherit;
+    }
+    .nav-dropdown-menu{
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0 0 0 16px;
+        position: inherit;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transition: 0s;
+        top: 0;
+        display: none;
+    }
+    .nav-dropdown-item.active, 
+    .nav-dropdown-item:hover {
+        color: var(--skinColor);
+        background: transparent;
+    }
+    .nav-item-have-sub.active .bn-nav-link > svg {
+        transform: rotate(180deg);
+    }
+    /* Home Page */
+    .hero-banner{
+        margin-right: -20px;
+    }
+    .video-outer-wrap{
+        padding-right: 24.86px;
+    }
+    .video-outer-wrap::after{
+        right: 0px;
+    }
+    .slider-padding{
+        padding: 34px 45px 34px 45px;
+    }
+    .slider-shadow::after {
+        right: -300px;
+    }
+    /* Footer */
+    .footer-logo-socila-wrap{
+        max-width: 100%;
+    }
+    /* Course Details */
+    .cd-sidebar-margin{
+        margin-top: 0 !important;
+    }
+}
+
+@media all and (max-width: 767px){
+    .hs-title-60px {
+        font-size: 45px;
+    }
+    .hs-title-48px {
+        font-size: 35px;
+    }
+    .man-title-36px {
+        font-size: 30px;
+    }
+    .hs-title-36px {
+        font-size: 30px;
+    }
+   
+    /* Home Page */
+    .hero-banner{
+        margin-right: 0px;
+    }
+    .video-player-wrap {
+        padding: 8px;
+    }
+    .slider-padding{
+        padding: 34px 42px 34px 42px;
+    }
+    /* Footer */
+    .footer-nav-max-144px{
+        max-width: 200px;
+        min-width: 200px;
+    }
+    .footer-nav-max-125px{
+        max-width: 200px;
+        min-width: 200px;
+    }
+    .footer-nav-max-267px{
+        max-width: fit-content;
+    }
+    /* My Course */
+    .course-list-banner {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+    /* Login Signup Page */
+    .login-signup-banner{
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .login-signup-section{
+        padding-top: 20px;
+    }
+}
+
+
+@media all and (max-width: 575px){
+    .hs-title-60px {
+        font-size: 38px;
+    }
+    .hs-title-48px {
+        font-size: 30px;
+    }
+    .hs-title-24px {
+        font-size: 22px;
+    }
+    .man-title-36px {
+        font-size: 26px;
+    }
+    .hs-title-36px {
+        font-size: 26px;
+    }
+    /* Header */
+    .mobile-search-label{
+        padding: 5px 0 5px 5px;
+    }
+    .profile-dropdown-toggle{
+        padding: 0;
+    }
+    .profile-dropdown-toggle::after{
+        display: none;
+    }
+    /* Home Page */
+    .total-active-students {
+        bottom: 40px;
+    }
+    .max-sm-350px{
+        max-width: 350px;
+    }
+    .video-player-wrap {
+        padding: 5px;
+    }
+    .slider-padding{
+        padding: 34px 20px 34px 20px;
+    }
+    .slider-shadow::after {
+        display: none;
+    }
+    /* Footer */
+    .footer-nav-max-144px{
+        max-width: fit-content;
+    }
+    .footer-nav-max-125px{
+        max-width: fit-content;
+    }
+    /* Course Details Page */
+    .instructor-single{
+        flex-basis: 100%;
+    }
+    /* Course Playing Page */
+    .comment-time::after{
+        display: none;
+    }
+    .comment-time{
+        padding-left: 0;
+    }
+}
+
+@media all and (max-width: 450px){
+    .header-search-wrap {
+        column-gap: 10px;
+    }
+    .borderless-select {
+        padding: 0 20px 0 0;
+    }
+    .language-and-profile{
+        column-gap: 10px;
+    }
+    .main-navbar-wrap {
+        column-gap: 10px !important;
+    }
+}
