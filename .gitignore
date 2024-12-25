@@ -12,6 +12,8 @@
 /public/uploads
 /storage/*.key
 /vendor
+/sites/
+sites/
 .env.backup
 .env.production
 .phpunit.result.cache
