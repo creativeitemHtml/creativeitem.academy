@@ -25,14 +25,11 @@
             <div class="row g-4 align-items-center mt-35px mb-100px">
                 <div class="col-lg-6 order-2 order-lg-1">
                     <div>
-                        <h1 class="hs-title-60px mb-20px"> {{ get_phrase('শেখার মাধ্যমে আপনার ক্যারিয়ার গড়ুন') }}</h1>
+                        <h1 class="hs-title-60px mb-20px"> {{ get_phrase('Build your career through learning') }}</h1>
                         <p class="hs-subtitle-20px mb-32px">
-                            {{ get_phrase('লার্নিং এর এই ইজি দুনিয়ায়, হাজারো অজুহাতে নিজের সফলতাকে
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        আটকে দিচ্ছেন নিজেই! সব অজুহাত ছাপিয়ে এখন ঘরে বসে স্কিল ডেভেলপ করুন দেশসেরা এক্সপার্টদের
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        কাছে।') }}
-                        </p>
+                            {{ get_phrase('In this easy world of learning, cautions guide your success in Jarojuha! Overcome all excuses and develop your crafting skills now with the best experts in the country.') }}</p>
                         <a href="#" class="btn bn-btn-skin">
-                            <span>{{ get_phrase('') }}ফ্রীতে ক্যারিয়ার গড়ুন</span>
+                            <span>{{ get_phrase('Build career for free') }}</span>
                             <img src="{{ asset('assets/frontend/default/images/icon/arrow-right-black-24.svg') }}" alt="icon">
                         </a>
                     </div>
@@ -63,7 +60,7 @@
                                     <img src="{{ asset('assets/frontend/default/images/img/user-profile-sm6.svg') }}" alt="student">
                                 </li>
                             </ul>
-                            <p class="ns-subtitle-13px">{{ get_phrase('') }}২৫০০+ একটিভ শিক্ষার্থী</p>
+                            <p class="ns-subtitle-13px">{{ get_phrase('Active students') }}</p>
                         </div>
                     </div>
                 </div>
@@ -76,133 +73,59 @@
             <div class="row mb-32px">
                 <div class="col-12">
                     <div class="d-flex align-items-center column-gap-4 row-gap-3 justify-content-between flex-wrap">
-                        <h1 class="hs-title-48px">{{ get_phrase('') }}স্কিল ডেভেলপমেন্ট হবে <span class="bn-text-skin">{{ get_phrase('') }}সম্পূর্ণ
-                                ফ্রী</span></h1>
-                        <a href="#" class="btn bn-btn-outline-skin">{{ get_phrase('') }}সবগুলো দেখুন</a>
+                        <h1 class="hs-title-48px">{{ get_phrase('Skill development will be') }} <span class="bn-text-skin">{{ get_phrase('completely free') }}</span></h1>
+                        <a href="{{ route('courses', ['pricing' => 'free']) }}" class="btn bn-btn-outline-skin">{{ get_phrase('View All') }}</a>
                     </div>
                 </div>
             </div>
-            <div class="row g-4 mb-100px">
-                <div class="col-md-6 col-lg-4">
-                    <div class="md-card hover-card position-relative hover-btn-outline-secondary">
-                        <a href="javascript:void(0)" class="md-card-link"></a>
-                        <div class="md-card-image">
-                            <img src="{{ asset('assets/frontend/default/images/img/lg-card-banner1.webp') }}" alt="banner">
-                        </div>
-                        <div class="md-card-body">
-                            <h3 class="man-title-20px mb-2">{{ get_phrase('') }}UX Leadership: Strategy & Tactics of
-                                Website Design</h3>
-                            <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
-                                <div class="sm-secondary-light-box d-flex align-items-center gap-2">
-                                    <p class="hs-subtitle-14px">৫.০</p>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
+            <div class="row g-4 justify-content-center mb-100px">
+                @foreach (App\Models\Course::where('is_paid', 0)->inRandomOrder()->take(3)->get() as $course)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="md-card hover-card position-relative hover-btn-outline-secondary">
+                            <a href="{{ route('course.details', $course->slug) }}" class="md-card-link"></a>
+                            <div class="md-card-image">
+                                <img src="{{ get_image($course->thumbnail) }}" alt="banner">
+                            </div>
+                            <div class="md-card-body">
+                                <h3 class="man-title-20px mb-2">{{ $course->title }}</h3>
+                                <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
+                                    <div class="sm-secondary-light-box d-flex align-items-center gap-2">
+                                        <p class="hs-subtitle-14px">{{ $course->average_rating }}</p>
+                                        <div class="d-flex align-items-center gap-1">
+                                            @for ($i = 1; $i <= $course->average_rating; $i++)
+                                                <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
+                                            @endfor
+                                        </div>
+                                    </div>
+
+                                    <div class="sm-secondary-light-box d-flex align-items-center gap-2">
+                                        <img src="{{ asset('assets/frontend/default/images/icon/user-octagon-black-20.svg') }}" alt="total-enroll">
+                                        <p class="hs-subtitle-14px">{{ total_enroll($course->id) }}</p>
                                     </div>
                                 </div>
-                                <div class="sm-secondary-light-box d-flex align-items-center gap-2">
-                                    <img src="{{ asset('assets/frontend/default/images/icon/user-octagon-black-20.svg') }}" alt="total-enroll">
-                                    <p class="hs-subtitle-14px">{{ get_phrase('') }}৫৮৬৫ ইনরোল</p>
+                                <p class="hs-subtitle-16px mb-3 ellipsis-3">{{ $course->short_description }}</p>
+                                <div class="d-flex align-items-center gap-3 justify-content-between flex-wrap">
+                                    <div class="d-flex align-items-center gap-1">
+                                        @if (!$course->is_paid)
+                                            <p class="hs2-title-18px"><del>{{ currency(number_format($course->price, 2)) }}</del></p>
+                                            <p class="hs2-title-18px bn-text-success">{{ get_phrase('Free') }}</p>
+                                        @else
+                                            @if ($course->discount_flag)
+                                                @php $discounted_price = number_format(($course->discounted_price), 2) @endphp
+                                                {{ currency($discounted_price) }}
+                                                <del>{{ currency(number_format($course->price, 2)) }}</del>
+                                            @else
+                                                {{ currency(number_format($course->price, 2)) }}
+                                            @endif
+                                        @endif
+                                    </div>
+                                    <a href="{{ route('purchase.course', $course->id) }}" class="btn bn-btn-outline-secondary py-2 position-relative">{{ get_phrase('Enroll Now') }}</a>
                                 </div>
-                            </div>
-                            <p class="hs-subtitle-16px mb-3">{{ get_phrase('') }}ইফেক্টিভ এড রান করার জন্য শুরু থেকে যা
-                                কিছু জানার প্রয়োজন
-                                Customer journey map, Strategy, data analysis এবং Facebook marketing এর সকল টুলস
-                                সম্বন্ধে জানতে পারবেন এই কোর্সে!</p>
-                            <div class="d-flex align-items-center gap-3 justify-content-between flex-wrap">
-                                <div class="d-flex align-items-center gap-1">
-                                    <p class="hs2-title-18px line-through"><del>{{ get_phrase('') }}৳৫০০০</del></p>
-                                    <p class="hs2-title-18px bn-text-success">{{ get_phrase('') }}সম্পূর্ণ ফ্রী</p>
-                                </div>
-                                <a href="#" class="btn bn-btn-outline-secondary py-2 position-relative">{{ get_phrase('') }}ইনরোল
-                                    করুন</a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="md-card hover-card position-relative hover-btn-outline-secondary">
-                        <a href="javascript:void(0)" class="md-card-link"></a>
-                        <div class="md-card-image">
-                            <img src="{{ asset('assets/frontend/default/images/img/lg-card-banner2.webp') }}" alt="banner">
-                        </div>
-                        <div class="md-card-body">
-                            <h3 class="man-title-20px mb-2">{{ get_phrase('') }}Web Development with PHP for website design
-                            </h3>
-                            <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
-                                <div class="sm-secondary-light-box d-flex align-items-center gap-2">
-                                    <p class="hs-subtitle-14px">৫.০</p>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                    </div>
-                                </div>
-                                <div class="sm-secondary-light-box d-flex align-items-center gap-2">
-                                    <img src="{{ asset('assets/frontend/default/images/icon/user-octagon-black-20.svg') }}" alt="total-enroll">
-                                    <p class="hs-subtitle-14px">{{ get_phrase('') }}২৬৬৫ ইনরোল</p>
-                                </div>
-                            </div>
-                            <p class="hs-subtitle-16px mb-3">{{ get_phrase('') }}ইফেক্টিভ এড রান করার জন্য শুরু থেকে যা
-                                কিছু জানার প্রয়োজন
-                                Customer journey map, Strategy, data analysis এবং Facebook marketing এর সকল টুলস
-                                সম্বন্ধে জানতে পারবেন এই কোর্সে!</p>
-                            <div class="d-flex align-items-center gap-3 justify-content-between flex-wrap">
-                                <div class="d-flex align-items-center gap-1">
-                                    <p class="hs2-title-18px line-through"><del>{{ get_phrase('') }}৳৮০০০</del></p>
-                                    <p class="hs2-title-18px bn-text-success">{{ get_phrase('') }}সম্পূর্ণ ফ্রী</p>
-                                </div>
-                                <a href="#" class="btn bn-btn-outline-secondary py-2 position-relative">{{ get_phrase('') }}ইনরোল
-                                    করুন</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="md-card hover-card position-relative hover-btn-outline-secondary">
-                        <a href="javascript:void(0)" class="md-card-link"></a>
-                        <div class="md-card-image">
-                            <img src="{{ asset('assets/frontend/default/images/img/lg-card-banner3.webp') }}" alt="banner">
-                        </div>
-                        <div class="md-card-body">
-                            <h3 class="man-title-20px mb-2">{{ get_phrase('') }}Fundamentals of Digital Marketing for
-                                Beginners</h3>
-                            <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
-                                <div class="sm-secondary-light-box d-flex align-items-center gap-2">
-                                    <p class="hs-subtitle-14px">৫.০</p>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                        <img src="{{ asset('assets/frontend/default/images/icon/star-yellow-16.svg') }}" alt="star">
-                                    </div>
-                                </div>
-                                <div class="sm-secondary-light-box d-flex align-items-center gap-2">
-                                    <img src="{{ asset('assets/frontend/default/images/icon/user-octagon-black-20.svg') }}" alt="total-enroll">
-                                    <p class="hs-subtitle-14px">{{ get_phrase('') }}৭৫৬৫ ইনরোল</p>
-                                </div>
-                            </div>
-                            <p class="hs-subtitle-16px mb-3">{{ get_phrase('') }}ইফেক্টিভ এড রান করার জন্য শুরু থেকে যা
-                                কিছু জানার প্রয়োজন
-                                Customer journey map, Strategy, data analysis এবং Facebook marketing এর সকল টুলস
-                                সম্বন্ধে জানতে পারবেন এই কোর্সে!</p>
-                            <div class="d-flex align-items-center gap-3 justify-content-between flex-wrap">
-                                <div class="d-flex align-items-center gap-1">
-                                    <p class="hs2-title-18px line-through"><del>{{ get_phrase('') }}৳৭০০০</del></p>
-                                    <p class="hs2-title-18px bn-text-success">{{ get_phrase('') }}সম্পূর্ণ ফ্রী</p>
-                                </div>
-                                <a href="#" class="btn bn-btn-outline-secondary py-2 position-relative">{{ get_phrase('') }}ইনরোল
-                                    করুন</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
     </section>
@@ -211,7 +134,7 @@
         <div class="container">
             <div class="row mb-32px">
                 <div class="col-12">
-                    <h1 class="hs-title-48px bn-text-skin text-center">{{ get_phrase('') }}ফ্রি ওয়েবিনার দেখুন</h1>
+                    <h1 class="hs-title-48px bn-text-skin text-center">ফ্রি ওয়েবিনার দেখুন</h1>
                 </div>
             </div>
             <div class="row g-4 mb-52px">
@@ -224,12 +147,12 @@
                         <div class="sm-card-body">
                             <div class="sm-secondary-light-box d-flex align-items-center gap-2 mb-2">
                                 <img src="{{ asset('assets/frontend/default/images/icon/calendar-black-20.svg') }} " alt="calender">
-                                <p class="hs-subtitle-14px">{{ get_phrase('') }}৭ জুলাই, রাত ৯:০০</p>
+                                <p class="hs-subtitle-14px">৭ জুলাই, রাত ৯:০০</p>
                             </div>
-                            <h3 class="hs-title-18px mb-3">{{ get_phrase('') }}প্রোডাক্ট ম্যানেজার হবার প্রস্তুতি কীভাবে
+                            <h3 class="hs-title-18px mb-3">প্রোডাক্ট ম্যানেজার হবার প্রস্তুতি কীভাবে
                                 শুরু করবো?</h3>
                             <a href="#" class="btn bn-btn-outline-secondary py-2 position-relative w-100">ইনরোল
-                                করুন{{ get_phrase('') }}</a>
+                                করুন</a>
                         </div>
                     </div>
                 </div>
@@ -242,9 +165,9 @@
                         <div class="sm-card-body">
                             <div class="sm-secondary-light-box d-flex align-items-center gap-2 mb-2">
                                 <img src="{{ asset('assets/frontend/default/images/icon/calendar-black-20.svg') }} " alt="calender">
-                                <p class="hs-subtitle-14px"> {{ get_phrase('') }}২২ জুলাই, রাত ৯:০০</p>
+                                <p class="hs-subtitle-14px"> ২২ জুলাই, রাত ৯:০০</p>
                             </div>
-                            <h3 class="hs-title-18px mb-3">{{ get_phrase('') }}ফ্লাটার শেখার ও মার্কেটপ্লেস থেকে ইনকাম
+                            <h3 class="hs-title-18px mb-3">ফ্লাটার শেখার ও মার্কেটপ্লেস থেকে ইনকাম
                                 করার গাইডলাইন</h3>
                             <a href="#" class="btn bn-btn-outline-secondary py-2 position-relative w-100">ইনরোল
                                 করুন</a>
@@ -260,11 +183,11 @@
                         <div class="sm-card-body">
                             <div class="sm-secondary-light-box d-flex align-items-center gap-2 mb-2">
                                 <img src="{{ asset('assets/frontend/default/images/icon/calendar-black-20.svg') }} " alt="calender">
-                                <p class="hs-subtitle-14px"> {{ get_phrase('') }}৫ জুলাই, রাত ৯:০০</p>
+                                <p class="hs-subtitle-14px"> ৫ জুলাই, রাত ৯:০০</p>
                             </div>
-                            <h3 class="hs-title-18px mb-3">{{ get_phrase('') }}প্রোডাক্ট ম্যানেজার হবার প্রস্তুতি কীভাবে
+                            <h3 class="hs-title-18px mb-3">প্রোডাক্ট ম্যানেজার হবার প্রস্তুতি কীভাবে
                                 শুরু করবো?</h3>
-                            <a href="#" class="btn bn-btn-outline-secondary py-2 position-relative w-100">{{ get_phrase('') }}ইনরোল
+                            <a href="#" class="btn bn-btn-outline-secondary py-2 position-relative w-100">ইনরোল
                                 করুন</a>
                         </div>
                     </div>
@@ -290,7 +213,7 @@
             <div class="row">
                 <div class="col-12">
                     <div>
-                        <a href="#" class="btn bn-btn-outline-light mx-auto">{{ get_phrase('') }}সবগুলো দেখুন</a>
+                        <a href="#" class="btn bn-btn-outline-light mx-auto">সবগুলো দেখুন</a>
                     </div>
                 </div>
             </div>

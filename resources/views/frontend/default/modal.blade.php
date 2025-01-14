@@ -1,9 +1,11 @@
-<div class="modal  fade" id="ajaxModal" tabindex="-1" aria-labelledby="ajaxModalLabel" aria-hidden="true">
+<div class="modal fade" id="ajaxModal" tabindex="-1" aria-labelledby="ajaxModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title text-16" id="ajaxModalLabel"></h6>
-                <button type="button" class="btn p-0" data-bs-dismiss="modal" aria-label="Close"><i class="fi fi-br-cross-small text-20 text-white"></i></button>
+                <button type="button" class="btn p-0" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fi fi-rr-cross-small"></i>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="w-100 text-center py-5">
@@ -11,9 +13,6 @@
                         <span class="visually-hidden"></span>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="eBtn gradient border-none" data-bs-dismiss="modal">{{ get_phrase('Close') }}</button>
             </div>
         </div>
     </div>
@@ -42,17 +41,17 @@
 <div class="modal eModal fade" id="confirmModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered sweet-alerts text-sweet-alerts">
         <div class="modal-content">
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <div class="icon icon-confirm">
                     <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
                         <path d="M22.5 29V10H25.5V29ZM22.5 38V35H25.5V38Z" />
                     </svg>
                 </div>
-                <p>{{ get_phrase('Are you sure?') }}</p>
-                <p class="focus-text">{{ get_phrase("You can't bring it back!") }}</p>
+                <p class="title">{{ get_phrase('Are you sure?') }}</p>
+                <p class="mb-3">{{ get_phrase("You can't bring it back!") }}</p>
                 <div class="confirmBtn">
-                    <button type="button" class="eBtn eBtn-red" data-bs-dismiss="modal">{{ get_phrase('Cancel') }}</button>
-                    <a href="" class="confirm-btn eBtn eBtn-green">{{ get_phrase("Yes, I'm sure") }}</a>
+                    <button type="button" class="eBtn eBtn-secondary" data-bs-dismiss="modal">{{ get_phrase('Cancel') }}</button>
+                    <a href="" class="eBtn eBtn-success">{{ get_phrase('Delete') }}</a>
                 </div>
             </div>
         </div>
@@ -179,8 +178,8 @@
                 }
             });
         } else {
-            $('#confirmModal .confirm-btn').attr('href', url);
-            $('#confirmModal .confirm-btn').removeAttr('onclick');
+            $('#confirmModal .eBtn-success').attr('href', url);
+            $('#confirmModal .eBtn-success').removeAttr('onclick');
         }
     }
 </script>

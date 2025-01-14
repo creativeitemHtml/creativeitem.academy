@@ -67,15 +67,16 @@
                                         </div>
                                         <div class="sm-secondary-light-box d-flex align-items-center gap-2">
                                             <img src="{{ asset('assets/frontend/default/images/icon/user-octagon-black-20') }}.svg" alt="total-enroll">
-                                            <p class="hs-subtitle-14px">{{ total_enroll($course->id) }}{{ get_phrase('ইনরোল') }}</p>
+                                            <p class="hs-subtitle-14px">{{ total_enroll($course->id) }} {{ get_phrase('Enrolled') }}</p>
                                         </div>
                                     </div>
-                                    <p class="hs-subtitle-16px mb-3">{{ $course->short_description }}</p>
+                                    <p class="hs-subtitle-16px mb-3 ellipsis-3">{{ $course->short_description }}</p>
                                     <div class="d-flex align-items-center gap-3 justify-content-between flex-wrap">
                                         <div class="d-flex align-items-center gap-1">
                                             <p class="hs2-title-18px line-through">
                                                 @if ($course->is_paid == 0)
-                                                    <p class="hs2-title-18px bn-text-success">{{ get_phrase('সম্পূর্ণ ফ্রী') }}</p>
+                                                    <p class="hs2-title-18px"><del>{{ currency(number_format($course->price, 2)) }}</del></p>
+                                                    <p class="hs2-title-18px bn-text-success">{{ get_phrase('Free') }}</p>
                                                 @else
                                                     @if ($course->discount_flag == 1)
                                                         @php $discounted_price = number_format(($course->discounted_price), 2) @endphp
@@ -96,7 +97,7 @@
                                             @endauth --}}
                                         </div>
 
-                                        <a href="{{ route('purchase.course', $course->id) }}" class="btn bn-btn-outline-secondary py-2 position-relative">{{ get_phrase('ইনরোল করুন') }}</a>
+                                        <a href="{{ route('purchase.course', $course->id) }}" class="btn bn-btn-outline-secondary py-2 position-relative">{{ get_phrase('Enroll Now') }}</a>
                                     </div>
                                 </div>
                             </div>

@@ -3,14 +3,19 @@
 @endphp
 @if ($user)
     <div class="d-flex flex-column align-items-center justify-content-center h-100 py-4 gap-5">
-        <div class="preview-image">
+        <div class="preview-image w-50 rounded-circle overflow-hidden">
             <img src="{{ get_image($user->photo) }}" alt="user-photo">
         </div>
 
         <form action="{{ route('update.profile.picture') }}" method="post" enctype="multipart/form-data">@csrf
-            <div class="form-group d-flex gap-4">
-                <input type="file" class="form-control" name="photo" id="profile-photo">
-                <button type="submit" class="eBtn gradient border-none">{{ get_phrase('Upload') }}</button>
+            <div class="row align-items-center">
+                <div class="col-9">
+                    <input type="file" class="form-control" name="photo" id="profile-photo">
+                </div>
+
+                <div class="col-3">
+                    <button type="submit" class="btn bn-btn-skin">{{ get_phrase('Upload') }}</button>
+                </div>
             </div>
         </form>
     </div>

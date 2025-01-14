@@ -1,10 +1,9 @@
     <div class="msg-sidebar">
         <div class="message-intro position-relative">
             <div class="search-box">
-                <form action="" class="Esearch_entry">
+                <form class="Esearch_entry" autocomplete="off">
                     @csrf
-                    <input type="text" name="user_email" id="search_student" class="form-control" placeholder="{{get_phrase('Search email')}}">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" name="user_email" id="search_student" class="form-control" placeholder="{{ get_phrase('Search email') }}">
                 </form>
 
                 <ul class="" id="msg-search-list">
@@ -33,7 +32,13 @@
                                 </div>
                                 <div class="ins-figure">
                                     <h4>{{ ucfirst($thread->user->name) }}</h4>
-                                    <small class=" text-12px">{{ timeAgo($last_message->created_at) }}</small>
+                                    <small class=" text-12px">
+                                        @if ($last_message->created_at)
+                                            {{ timeAgo($last_message->created_at) }}
+                                        @else
+                                            {{ get_phrase('No messages yet') }}
+                                        @endif
+                                    </small>
                                 </div>
                             </div>
 

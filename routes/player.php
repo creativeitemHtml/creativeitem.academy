@@ -23,10 +23,5 @@ Route::middleware(['auth'])->group(function () {
         Route::get('forum/question/likes/{id}', 'likes')->name('forum.question.likes');
         Route::get('forum/question/dislikes/{id}', 'dislikes')->name('forum.question.dislikes');
         Route::get('forum/tab/active', 'tab_active')->name('forum.tab.active');
-
-        Route::get('forum/question/reply/create', 'create_reply')->name('forum.question.reply.create');
-        Route::post('forum/question/reply/store', 'store_reply')->name('forum.question.reply.store');
-        Route::get('forum/question/reply/edit', 'edit_reply')->name('forum.question.reply.edit');
-        Route::post('forum/question/reply/update/{id}', 'update_reply')->name('forum.question.reply.update');
     });
 });

@@ -6,7 +6,7 @@
             </div>
         </div>
     @elseif ($lesson_details->lesson_type == 'video-url')
-        <div class="course-video-area">
+        <div class="course-video-area w-100">
             <div class="course-video-wrap">
                 <div id="player">
                     <iframe src="{{ $lesson_details->lesson_src }}?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe>
@@ -30,17 +30,14 @@
             <div class="course-video-wrap">
                 <div class=" bd-r-10 mb-16 position-relative bg-light custom-system-video">
                     <video id="player" playsinline controls>
-                        <source src="{{ asset('uploads/lesson_file/videos/' . $lesson_details->lesson_src) }}" type="video/mp4">
+                        <source src="{{ asset($lesson_details->lesson_src) }}" type="video/mp4">
                     </video>
                     @include('course_player.player_config')
                 </div>
             </div>
         </div>
     @elseif($lesson_details->lesson_type == 'image')
-        @php
-            $img = asset('uploads/lesson_file/attachment/' . $lesson_details->attachment);
-        @endphp
-        <img width="100%" class="max-w-auto" height="auto" src="{{ $img }}" />
+        <img width="100%" src="{{ asset('uploads/lesson_file/attachment/' . $lesson_details->attachment) }}" />
     @elseif($lesson_details->lesson_type == 'vimeo-url' && $lesson_details->video_type == 'vimeo')
         @php
             $video_url = $lesson_details->lesson_src;
@@ -49,7 +46,6 @@
         @endphp
 
         <div class="course-video-area">
-            <!-- Video -->
             <div class="course-video-wrap">
                 <div id="player">
                     <iframe height="500" src="https://player.vimeo.com/video/{{ $video_id }}?loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media" allowfullscreen allowtransparency allow="autoplay"></iframe>
@@ -70,7 +66,6 @@
             endif;
         @endphp
         <div class="course-video-area">
-            <!-- Video -->
             <div class="course-video-wrap">
                 <video width="100%" height="680" id="player" playsinline controls>
                     <source class="" src="https://www.googleapis.com/drive/v3/files/{{ $video_id }}?alt=media&key={{ get_settings('youtube_api_key') }}" type="video/mp4">
@@ -80,7 +75,6 @@
         </div>
     @elseif($lesson_details->lesson_type == 'html5')
         <div class="course-video-area">
-            <!-- Video -->
             <div class="course-video-wrap">
                 <video width="100%" height="680" id="player" playsinline controls>
                     <source class="remove_video_src" src="{{ $lesson_details->lesson_src }}" type="video/mp4">

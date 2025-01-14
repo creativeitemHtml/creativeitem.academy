@@ -37,6 +37,10 @@ class CourseController extends Controller
             }
         }
 
+        if (request()->has('pricing') && request()->query('pricing') == 'free') {
+            $query = $query->where('is_paid', 0);
+        }
+
         // searched courses
         if (request()->has('search')) {
             $query->where(function ($query) {

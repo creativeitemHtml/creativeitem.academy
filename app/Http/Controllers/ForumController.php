@@ -28,76 +28,52 @@ class ForumController extends Controller
 
     public function store(Request $request)
     {
-        $rules = [
-            'title'       => 'required',
-            'description' => 'required',
-        ];
+        $request->validate([
+            'description' => 'required|string',
+            'parent_id'   => 'nullable|numeric',
+        ]);
 
-        $validate = Validator::make($request->all(), $rules);
-
-        if ($validate->fails()) {
-            return back()->withErrors($validate)->withInput();
-        }
-
-        $msg                 = 'Question added successfully.';
-        $data['description'] = $request->description;
-        if ($request->title == 'reply') {
-            $msg                 = 'Reply added successfully.';
-            $data['description'] = strip_tags($request->description);
-        }
-
-        $data['user_id']   = auth()->user()->id;
-        $data['course_id'] = $request->course_id;
-        $data['parent_id'] = $request->parent_id ?? 0;
-        $data['title']     = $request->title;
+        $data['description'] = strip_tags($request->description);
+        $data['user_id']     = auth()->user()->id;
+        $data['course_id']   = $request->course_id;
+        $data['parent_id']   = $request->parent_id ?? 0;
 
         Forum::insert($data);
-        Session::flash('success', get_phrase($msg));
+        Session::flash('success', get_phrase($request->has('parent_id') ? 'Reply added successfully.' : 'Question added successfully.'));
         return redirect()->back();
     }
 
     public function edit(Request $request)
     {
-        $page_data['course_id'] = $request->course_id;
-        $page_data['question']  = Forum::where('id', $request->question_id)->first();
-        return view('course_player.forum.edit_question', $page_data);
+        $page_data['comment'] = Forum::where('id', $request->comment_id)->first();
+        return view('course_player.forum.edit_comment', $page_data);
     }
 
     public function delete($id)
     {
         $query = Forum::where('user_id', auth()->user()->id)->where('id', $id);
+
         if ($query->doesntExist()) {
             Session::flash('error', get_phrase('Data not found.'));
         } else {
             $query->delete();
             Session::flash('success', get_phrase('Question deleted successfully.'));
         }
+
         return redirect()->back();
     }
 
     public function update(Request $request, $id)
     {
-        $rules = [
-            'title'       => 'required',
-            'description' => 'required',
-        ];
-        $validate = Validator::make($request->all(), $rules);
-        if ($validate->fails()) {
-            return back()->withErrors($validate)->withInput();
-        }
+        $request->validate([
+            'description' => 'required|string',
+            'parent_id'   => 'nullable|numeric',
+        ]);
 
-        $msg                 = 'Question updated successfully.';
-        $data['description'] = $request->description;
-        if ($request->title == 'reply') {
-            $msg                 = 'Reply updated successfully.';
-            $data['description'] = strip_tags($request->description);
-        }
-
-        $data['title']       = $request->title;
-        $data['description'] = $request->description;
+        $data['description'] = strip_tags($request->description);
 
         Forum::where('id', $id)->update($data);
-        Session::flash('success', get_phrase($msg));
+        Session::flash('success', get_phrase($request->has('parent_id') ? 'Reply updated successfully.' : 'Question updated successfully.'));
         return redirect()->back();
     }
 
@@ -108,9 +84,11 @@ class ForumController extends Controller
         $likes    = $question->likes ? json_decode($question->likes, true) : [];
 
         if (in_array($user_id, $likes)) {
-            $likes = self::rmv_item($likes, $user_id);
+            $active = false;
+            $likes  = self::rmv_item($likes, $user_id);
             Session::flash('success', get_phrase('Your like has been removed.'));
         } else {
+            $active = true;
             array_push($likes, $user_id);
             Session::flash('success', get_phrase('Your like has been added.'));
         }
@@ -124,7 +102,7 @@ class ForumController extends Controller
         }
 
         Forum::where('id', $id)->update($data);
-        return redirect()->back();
+        return response()->json(['status' => 'success', 'active' => $active]);
     }
 
     public function dislikes($id)
@@ -164,17 +142,5 @@ class ForumController extends Controller
     {
         $tab = explode('#pills-', $request->tab)[1];
         Session::put('forum_tab', $tab);
-    }
-
-    public function create_reply(Request $request)
-    {
-        $page_data['parent_question_id'] = $request->parent_question_id;
-        return view('course_player.forum.create_reply', $page_data);
-    }
-
-    public function edit_reply(Request $request)
-    {
-        $page_data['reply'] = Forum::where('id', $request->reply_id)->first();
-        return view('course_player.forum.edit_reply', $page_data);
     }
 }

@@ -76,7 +76,7 @@ class CurriculumController extends Controller
             $data['lesson_src'] = $request->lesson_src;
 
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -89,7 +89,7 @@ class CurriculumController extends Controller
             $data['video_type'] = $request->lesson_provider;
             $data['lesson_src'] = $request->lesson_src;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -106,7 +106,7 @@ class CurriculumController extends Controller
                 $file_name = strtotime('now') . random(4) . '.' . $item->getClientOriginalExtension();
 
                 $path = public_path('uploads/lesson_file/attachment');
-                if (!File::isDirectory($path)) {
+                if (! File::isDirectory($path)) {
                     File::makeDirectory($path, 0777, true, true);
                 } else {
                     FileUploader::upload($request->attachment, 'uploads/lesson_file/attachment/' . $file_name);
@@ -124,7 +124,7 @@ class CurriculumController extends Controller
                 $file_name = strtotime('now') . random(4) . '.' . $item->getClientOriginalExtension();
 
                 $path = public_path('uploads/lesson_file/attachment');
-                if (!File::isDirectory($path)) {
+                if (! File::isDirectory($path)) {
                     File::makeDirectory($path, 0777, true, true);
                 } else {
                     FileUploader::upload($request->attachment, 'uploads/lesson_file/attachment/' . $file_name);
@@ -138,7 +138,7 @@ class CurriculumController extends Controller
             $data['video_type'] = $request->lesson_provider;
             $data['lesson_src'] = $request->lesson_src;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -154,7 +154,7 @@ class CurriculumController extends Controller
             $data['video_type'] = $request->lesson_provider;
             $data['lesson_src'] = $request->lesson_src;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -191,7 +191,7 @@ class CurriculumController extends Controller
                         return redirect()->back()->with('error', get_phrase('Something went wrong.'));
                     }
                 }
-                FileUploader::upload($request->system_video_file, 'uploads/lesson_file/attachment/' . $file_name);
+                FileUploader::upload($request->system_video_file, 'uploads/lesson_file/videos/' . $file_name);
 
                 $file = str_replace(public_path(''), '', $path) . $file_name;
             }
@@ -199,7 +199,7 @@ class CurriculumController extends Controller
             $data['video_type'] = $request->lesson_provider;
             $data['lesson_src'] = $file;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -235,7 +235,7 @@ class CurriculumController extends Controller
         } elseif ($request->lesson_type == 'video-url') {
             $lesson['lesson_src'] = $request->lesson_src;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -246,7 +246,7 @@ class CurriculumController extends Controller
         } elseif ($request->lesson_type == 'html5') {
             $lesson['lesson_src'] = $request->lesson_src;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -263,7 +263,7 @@ class CurriculumController extends Controller
                 $file_name = strtotime('now') . random(4) . '.' . $item->getClientOriginalExtension();
 
                 $path = public_path('uploads/lesson_file/attachment');
-                if (!File::isDirectory($path)) {
+                if (! File::isDirectory($path)) {
                     File::makeDirectory($path, 0777, true, true);
                 } else {
                     FileUploader::upload($request->attachment, 'uploads/lesson_file/attachment/' . $file_name);
@@ -281,7 +281,7 @@ class CurriculumController extends Controller
                 $file_name = strtotime('now') . random(4) . '.' . $item->getClientOriginalExtension();
 
                 $path = public_path('uploads/lesson_file/attachment');
-                if (!File::isDirectory($path)) {
+                if (! File::isDirectory($path)) {
                     File::makeDirectory($path, 0777, true, true);
                 } else {
                     FileUploader::upload($request->attachment, 'uploads/lesson_file/attachment/' . $file_name);
@@ -293,7 +293,7 @@ class CurriculumController extends Controller
         } elseif ($request->lesson_type == 'vimeo-url') {
             $lesson['lesson_src'] = $request->lesson_src;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -306,7 +306,7 @@ class CurriculumController extends Controller
         } elseif ($request->lesson_type == 'google_drive') {
             $lesson['lesson_src'] = $request->lesson_src;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);
@@ -343,14 +343,14 @@ class CurriculumController extends Controller
                         return redirect()->back()->with('error', get_phrase('Something went wrong.'));
                     }
                 }
-                FileUploader::upload($request->system_video_file, 'uploads/lesson_file/videos/'. $file_name);
+                FileUploader::upload($request->system_video_file, 'uploads/lesson_file/videos/' . $file_name);
 
                 $file = str_replace(public_path(''), '', $path) . $file_name;
             }
 
             $lesson['lesson_src'] = $file;
             if (empty($request->duration)) {
-                $data['duration']   =  '00:00:00';
+                $data['duration'] = '00:00:00';
             } else {
                 $duration_formatter = explode(':', $request->duration);
                 $hour               = sprintf('%02d', $duration_formatter[0]);

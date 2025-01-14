@@ -1,4 +1,4 @@
-<div class="empty py-5 shadow-sm rounded-4 bg-white d-flex align-items-center justify-content-center flex-column gap-4">
+<div class="empty py-5 rounded-4 bg-white d-flex align-items-center justify-content-center flex-column gap-4">
     <span class="">
         <svg xmlns="http://www.w3.org/2000/svg" width="168" height="168" viewBox="0 0 168 168" fill="none">
             <path

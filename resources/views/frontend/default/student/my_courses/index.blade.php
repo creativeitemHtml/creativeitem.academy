@@ -9,11 +9,11 @@
                     <div>
                         <nav aria-label="bn-breadcrumb" class="mb-20px">
                             <ul class="bn-breadcrumb">
-                                <li class="bn-breadcrumb-item"><a href="#">{{ get_phrase('ফিরে যাও') }}</a></li>
-                                <li class="bn-breadcrumb-item active" aria-current="page">{{ get_phrase('আমার কোর্স') }}</li>
+                                <li class="bn-breadcrumb-item"><a href="#">{{ get_phrase('Go Back') }}</a></li>
+                                <li class="bn-breadcrumb-item active" aria-current="page">{{ get_phrase('My Courses') }}</li>
                             </ul>
                         </nav>
-                        <h1 class="man-title-36px mb-12px">{{ get_phrase('আমার কোর্স') }}</h1>
+                        <h1 class="man-title-36px mb-12px">{{ get_phrase('My Courses') }}</h1>
                         <p class="hs-subtitle-16px">{{ get_phrase('শিখুন ওয়েব এবং অ্যাপ ডেভেলপমেন্ট, টেক-ক্যারিয়ার গড়ুন এখনই।') }}</p>
                     </div>
                 </div>
@@ -33,13 +33,37 @@
 
                         <ul class="course-list-group">
                             @foreach ($my_courses as $course)
+                                @php
+                                    $watch_history = App\Models\Watch_history::where('course_id', $course->course_id)
+                                        ->where('student_id', auth()->user()->id)
+                                        ->first();
+
+                                    $lesson = App\Models\Lesson::where('course_id', $course->course_id)
+                                        ->orderBy('sort', 'asc')
+                                        ->first();
+
+                                    if (!$watch_history && !$lesson) {
+                                        $url = route('course.player', ['slug' => $course->slug]);
+                                    } else {
+                                        if ($watch_history) {
+                                            $lesson_id = $watch_history->watching_lesson_id;
+                                        } elseif ($lesson) {
+                                            $lesson_id = $lesson->id;
+                                        }
+                                        $url = route('course.player', [
+                                            'slug' => $course->slug,
+                                            'id' => $lesson_id,
+                                        ]);
+                                    }
+                                @endphp
+
                                 <li class="d-flex align-items-start flex-column flex-md-row gap-12px course-list-item hover-btn-outline-secondary">
-                                    <a href="#" class="course-list-banner">
+                                    <a href="{{ $url }}" class="course-list-banner">
                                         <img src="{{ get_image($course->thumbnail) }}" alt="banner">
                                     </a>
                                     <div class="course-list-details">
                                         <div class="d-flex align-items-start justify-content-between gap-12px mb-3">
-                                            <a href="#" class="man-title-16px">{{ ucfirst($course->title) }}</a>
+                                            <a href="{{ $url }}" class="man-title-16px">{{ ucfirst($course->title) }}</a>
                                             <div class="dropdown mt-2px">
                                                 <button class="btn dropdown-toggle icon-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,10 +106,11 @@
                                                     {{ get_phrase('ঘণ্টার ভিডিও লেসন') }}</span>
                                             </li>
                                         </ul>
+
                                         <div class="mb-12px">
-                                            <div class="bn-progress" data-skill="{{ progress_bar($course->course_id) }}">
-                                            </div>
+                                            <div class="bn-progress" data-skill="{{ progress_bar($course->course_id) }}"></div>
                                         </div>
+
                                         <div class="d-flex
                                                 align-items-center gap-3 flex-wrap justify-content-between">
                                             <div class="d-flex align-items-center gap-2">
@@ -95,31 +120,6 @@
                                                 <p class="hs-subtitle-14px fw-medium"><span class="bn-text-body">{{ $course->user_name }}</span></p>
                                             </div>
 
-
-                                            @php
-                                                $watch_history = App\Models\Watch_history::where('course_id', $course->course_id)
-                                                    ->where('student_id', auth()->user()->id)
-                                                    ->first();
-
-                                                $lesson = App\Models\Lesson::where('course_id', $course->course_id)
-                                                    ->orderBy('sort', 'asc')
-                                                    ->first();
-
-                                                if (!$watch_history && !$lesson) {
-                                                    $url = route('course.player', ['slug' => $course->slug]);
-                                                } else {
-                                                    if ($watch_history) {
-                                                        $lesson_id = $watch_history->watching_lesson_id;
-                                                    } elseif ($lesson) {
-                                                        $lesson_id = $lesson->id;
-                                                    }
-                                                    $url = route('course.player', [
-                                                        'slug' => $course->slug,
-                                                        'id' => $lesson_id,
-                                                    ]);
-                                                }
-
-                                            @endphp
                                             <a href="{{ $url }}" class="btn bn-btn-outline-secondary min-w-180px py-2">
                                                 <img src="{{ asset('assets/frontend/default/images/icon/video-circle-black-24.svg') }}" alt="icon">
                                                 <span>{{ get_phrase('শুরু করুন') }}</span>
